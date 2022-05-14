@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="flex fixed gap-4 top-16 bottom-20 mt-8 w-52 flex-col h-screen bg-purple-100 p-4 rounded-md">
+    <div className="flex fixed gap-4 top-16 bottom-20 mt-12 w-52 flex-col h-screen bg-purple-100 p-4 rounded-md">
       <div className="flex flex-row items-center gap-2 bg-purple-200 rounded-md p-2 hover:bg-purple-300 hover:font-semibold cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
