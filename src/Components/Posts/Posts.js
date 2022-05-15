@@ -11,18 +11,18 @@ const Posts = () => {
             <>
               <div
                 href="#"
-                class="block p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
+                class=" flex flex-col items-center p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
                 key={post}
               >
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
                   Noteworthy technology acquisitions 2021
                 </h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">
+                <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
                   Here are the biggest enterprise technology acquisitions of
                   2021 so far, in reverse chronological order. far, in reverse
                   chronological order.
                 </p>
-                <div className="flex flex-row py-4 gap-8 max-w-sm justify-start items-start ">
+                <div className="flex flex-row py-4 gap-8 max-w-sm justify-center items-center ">
                   <div className="flex gap-2 focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 cursor-pointer">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -36,6 +36,9 @@ const Posts = () => {
                   </div>
                   <div className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 cursor-pointer">
                     Comment
+                  </div>
+                  <div className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 cursor-pointer">
+                    See more
                   </div>
                 </div>
               </div>
