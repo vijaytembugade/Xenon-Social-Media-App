@@ -6,7 +6,7 @@ const Signup = () => {
       <div className="flex flex-col-reverse md:flex-row justify-evenly items-center  pt-16 gap-4">
         <div className="w-64 md:w-96 ">
           <h2 className="text-2xl my-2 font-semibold">
-            Create New Account to the most intellectual social platform
+            Create New Account on the most intellectual social platform
             <img
               className="px-2 w-16 h-16 inline-block"
               src="/assets/logo.png"
