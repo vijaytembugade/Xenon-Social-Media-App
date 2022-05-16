@@ -9,6 +9,7 @@ import Homepage from "./Pages/Homepage";
 import Toast from "./Components/Toast/Toast";
 import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
 import Posts from "./Components/Posts/Posts";
+import SinglePost from "./Features/Posts/Components/SinglePost";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <div className="px-8 md:px-16 py-8 md:py-16 mt-16 ">
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/post/:id" element={<SinglePost />} />
           <Route
             path="/new-post"
             element={
@@ -34,8 +36,6 @@ function App() {
               </PrivateRoutes>
             }
           />
-          {/* <Route to="posts" element={<Posts />} />
-            <Route to="followings"></Route> */}
 
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />

@@ -78,6 +78,7 @@ export const createPostHandler = function (schema, request) {
       );
     }
     const { postData } = JSON.parse(request.requestBody);
+
     const post = {
       _id: uuid(),
       ...postData,
@@ -87,6 +88,7 @@ export const createPostHandler = function (schema, request) {
         dislikedBy: [],
       },
       username: user.username,
+      comments: [],
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
