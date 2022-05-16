@@ -74,6 +74,7 @@ const authSlice = createSlice({
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       state.status = "error";
+      state.status = "idle";
       state.erorr = action.error.message;
     });
 
@@ -98,6 +99,7 @@ const authSlice = createSlice({
       toast.success("Logged in successfully!");
     });
     builder.addCase(userSignup.rejected, (state, action) => {
+      state.status = "idle";
       state.status = "error";
       state.erorr = action.error.message;
     });
