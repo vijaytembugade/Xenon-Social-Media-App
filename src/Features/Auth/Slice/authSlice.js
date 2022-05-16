@@ -76,6 +76,7 @@ const authSlice = createSlice({
       state.status = "error";
       state.status = "idle";
       state.erorr = action.error.message;
+      toast.error("User not able to login!");
     });
 
     //signup action
@@ -102,6 +103,7 @@ const authSlice = createSlice({
       state.status = "idle";
       state.status = "error";
       state.erorr = action.error.message;
+      toast.error(action.error.message);
     });
   },
 });

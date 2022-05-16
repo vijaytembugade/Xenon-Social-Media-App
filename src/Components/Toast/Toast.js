@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 
 const Toast = () => {
   return (
-    <div>
+    <>
       <Toaster
         position="bottom-right"
         reverseOrder={false}
@@ -12,7 +12,7 @@ const Toast = () => {
           duration: 3000,
         }}
       />
-    </div>
+    </>
   );
 };
 
