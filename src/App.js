@@ -8,6 +8,7 @@ import NewPost from "./Features/Posts/Components/NewPost";
 import Homepage from "./Pages/Homepage";
 import Toast from "./Components/Toast/Toast";
 import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
+import Posts from "./Components/Posts/Posts";
 
 function App() {
   return (
@@ -26,13 +27,16 @@ function App() {
             }
           />
           <Route
-            path="/userprofile"
+            path="/userprofile/*"
             element={
               <PrivateRoutes>
                 <Profile />
               </PrivateRoutes>
             }
           />
+          {/* <Route to="posts" element={<Posts />} />
+            <Route to="followings"></Route> */}
+
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
         </Routes>

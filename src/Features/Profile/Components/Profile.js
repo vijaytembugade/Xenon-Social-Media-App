@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
 import Posts from "../../../Components/Posts/Posts";
+import UsersList from "../../../Components/UsersList/UsersList";
 import { authActions } from "../../Auth/Slice/authSlice";
 
 const Profile = () => {
@@ -103,8 +105,29 @@ const Profile = () => {
         </div>
       </div>
       <div className="p-16 flex flex-col gap-12 items-center">
-        <span className="text-2xl font-bold">Your Posts</span>
-        <Posts />
+        <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+          <li className="mr-2">
+            <NavLink
+              to="posts"
+              aria-current="page"
+              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
+            >
+              Your Posts
+            </NavLink>
+          </li>
+          <li className="mr-2">
+            <NavLink
+              to="followings"
+              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
+            >
+              Following
+            </NavLink>
+          </li>
+        </ul>
+        <Routes>
+          <Route path="posts" element={<Posts />} />
+          <Route path="followings" element={<UsersList />} />
+        </Routes>
       </div>
     </div>
   );
