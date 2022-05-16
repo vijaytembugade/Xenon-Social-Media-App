@@ -4,7 +4,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 
 const Homepage = () => {
   return (
-    <div className="flex flex-row justify-center ">
+    <div className="flex flex-row justify-center max-w-screen-2xl">
       <div className="hidden lg:basis-1/6 md:overflow-y-hidden md:hidden lg:block">
         <Sidebar />
       </div>

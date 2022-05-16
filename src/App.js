@@ -14,7 +14,7 @@ function App() {
     <div>
       <Toast />
       <Navbar />
-      <div className="px-8 md:px-16 py-8 md:py-16 mt-16">
+      <div className="px-8 md:px-16 py-8 md:py-16 mt-16 ">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route
