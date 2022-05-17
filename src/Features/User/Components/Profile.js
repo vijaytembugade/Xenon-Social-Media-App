@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
-import Posts from "../../../Components/Posts/Posts";
-import Loader from "../../../Components/Loader/Loader";
-import UsersList from "../../../Components/UsersList/UsersList";
-
+import { Loader, Posts, UsersList } from "../../../Components";
 import { authActions } from "../../Auth/Slice/authSlice";
 import { getUsersPosts } from "../../Posts/Slice/postSlice";
 
@@ -16,6 +13,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUsersPosts({ username }));
   }, [dispatch, username]);
+
   return (
     <div className="flex flex-col justify-evenly items-center">
       <div class="max-w-sm md:w-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-full  h-fit">

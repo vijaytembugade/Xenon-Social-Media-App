@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import Posts from "../Components/Posts/Posts";
-import Loader from "../Components/Loader/Loader";
-import Sidebar from "../Components/Sidebar/Sidebar";
-import UsersList from "../Components/UsersList/UsersList";
 import { getAllPosts } from "../Features/Posts/Slice/postSlice";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Loader, Posts, Sidebar, UsersList } from "../Components";
 
 const Homepage = () => {
   const dispatch = useDispatch();

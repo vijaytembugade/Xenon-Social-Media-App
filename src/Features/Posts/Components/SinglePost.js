@@ -1,25 +1,15 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Loader from "../../../Components/Loader/Loader";
+import { Loader } from "../../../Components";
+import { newPostReducer } from "../../../reducers";
 import { deletePost, postActions, updatePost } from "../Slice/postSlice";
 import { getSinglePost } from "../Slice/postSlice";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import Moment from "react-moment";
 
 const SinglePost = () => {
   const [isEditable, setIsEditable] = useState(false);
-  const newPostReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_TITLE": {
-        return { ...state, title: action.payload.title };
-      }
-      case "SET_CONTENT": {
-        return { ...state, content: action.payload.content };
-      }
-      case "SET_IS_PUBLIC": {
-        return { ...state, isPublic: !state.isPublic };
-      }
-    }
-  };
 
   const [editPost, editPostDispatch] = useReducer(newPostReducer, {
     title: "",
@@ -65,21 +55,25 @@ const SinglePost = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       {status === "pending" && <Loader />}
+      {isEditable && <h2 className="font-bold text-3xl my-8">Edit Post</h2>}
       {status === "idle" && (
-        <div>
+        <div className="w-60 md:w-96">
           {isEditable ? (
-            <input
-              type="text"
-              id="large-input"
-              className="my-8  block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={editPost.title}
-              onChange={(e) =>
-                editPostDispatch({
-                  type: "SET_TITLE",
-                  payload: { title: e.target.value },
-                })
-              }
-            />
+            <label className="my-8">
+              <span className="font-semibold ">Post Title</span>
+              <input
+                type="text"
+                id="large-input"
+                className="my-2 block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value={editPost.title}
+                onChange={(e) =>
+                  editPostDispatch({
+                    type: "SET_TITLE",
+                    payload: { title: e.target.value },
+                  })
+                }
+              />
+            </label>
           ) : (
             <p className="text-2xl font-bold w-60 md:w-96 my-4 ">
               {singlePost?.title}
@@ -88,7 +82,13 @@ const SinglePost = () => {
 
           {!isEditable && (
             <div className=" flex flex-row justify-between items-center my-4 font-semibold">
-              <div>Author: {singlePost?.username}</div>
+              <div>
+                Author: {singlePost?.username}
+                <div className="text-gray-300">
+                  <Moment toNow>{singlePost?.createdAt}</Moment>
+                </div>
+              </div>
+
               <div>
                 {singlePost?.username === username && (
                   <>
@@ -150,20 +150,24 @@ const SinglePost = () => {
               </div>
             </div>
           )}
+
           <div>
             {isEditable ? (
-              <textarea
-                id="message"
-                rows="4"
-                value={editPost.content}
-                onChange={(e) =>
-                  editPostDispatch({
-                    type: "SET_CONTENT",
-                    payload: { content: e.target.value },
-                  })
-                }
-                className="my-8  block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              />
+              <label className="my-8">
+                <span className="font-semibold ">Post Title</span>
+                <textarea
+                  id="message"
+                  rows="4"
+                  value={editPost.content}
+                  onChange={(e) =>
+                    editPostDispatch({
+                      type: "SET_CONTENT",
+                      payload: { content: e.target.value },
+                    })
+                  }
+                  className="my-2 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+              </label>
             ) : (
               <div className="w-64 md:w-96 min-h-[250px] text-justify contentEditable">
                 {singlePost?.content}

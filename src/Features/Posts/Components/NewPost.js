@@ -2,23 +2,10 @@ import React, { useReducer } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { newPostReducer } from "../../../reducers";
 import { createNewPost } from "../Slice/postSlice";
 
 const NewPost = () => {
-  const newPostReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_TITLE": {
-        return { ...state, title: action.payload.title };
-      }
-      case "SET_CONTENT": {
-        return { ...state, content: action.payload.content };
-      }
-      case "SET_IS_PUBLIC": {
-        return { ...state, isPublic: !state.isPublic };
-      }
-    }
-  };
-
   const [newPost, newPostDispatch] = useReducer(newPostReducer, {
     title: "",
     content: "",

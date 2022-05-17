@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Posts = ({ posts }) => {
+export const Posts = ({ posts }) => {
   return (
     <>
       <div className="w-60  h-screen flex flex-col justify-start items-center gap-8 ">
@@ -50,5 +50,3 @@ const Posts = ({ posts }) => {
     </>
   );
 };
-
-export default Posts;
