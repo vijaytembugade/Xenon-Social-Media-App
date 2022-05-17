@@ -7,6 +7,7 @@ import NewPost from "./Features/Posts/Components/NewPost";
 import Homepage from "./Pages/Homepage";
 import SinglePost from "./Features/Posts/Components/SinglePost";
 import { PrivateRoutes, Toast, Navbar } from "./Components";
+import UserDetails from "./Features/User/Components/UserDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/post/:id" element={<SinglePost />} />
+          <Route path="/user/:id" element={<UserDetails />} />
           <Route
             path="/new-post"
             element={

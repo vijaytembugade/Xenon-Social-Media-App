@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UsersList = ({ users }) => {
   return (
@@ -12,9 +13,14 @@ const UsersList = ({ users }) => {
               alt="Bordered avatar"
             />
 
-            <button aria-current="true" type="button" className="line-clamp-1">
+            <Link
+              to={`/user/${user._id}`}
+              aria-current="true"
+              type="button"
+              className="line-clamp-1"
+            >
               {user.username}
-            </button>
+            </Link>
           </div>
         );
       })}
