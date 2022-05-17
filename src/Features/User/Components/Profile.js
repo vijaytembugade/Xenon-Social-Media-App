@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { Loader, Posts, UsersList } from "../../../Components";
+import Modal from "../../../Components/Modal/Modal";
 import { authActions } from "../../Auth/Slice/authSlice";
 import { getUsersPosts } from "../../Posts/Slice/postSlice";
+import ProfileEditModal from "./ProfileEditModal";
 
 const Profile = () => {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const { username, email } = useSelector((store) => store.auth);
   const { posts, status } = useSelector((store) => store.posts);
@@ -16,65 +19,26 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-evenly items-center">
+      {showModal && (
+        <Modal setShowModal={setShowModal}>
+          <ProfileEditModal
+            username={username}
+            email={email}
+            setShowModal={setShowModal}
+          />
+        </Modal>
+      )}
       <div class="max-w-sm md:w-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-full  h-fit">
-        <div class="flex justify-end px-4 pt-4">
+        <div class="relative flex justify-end px-4 pt-4">
           <button
-            id="dropdownButton"
-            data-dropdown-toggle="dropdown"
             class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4  focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
             type="button"
+            onClick={() => setShowModal(true)}
           >
-            <svg
-              class="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-            </svg>
+            Edit Profile
           </button>
-
-          <div
-            id="dropdown"
-            class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700"
-            style={{
-              position: "absolute",
-              inset: "auto auto 0px 0px",
-              margin: "0px",
-              transform: "translate3d(653.6px, 2860.8px, 0px)",
-            }}
-            data-popper-reference-hidden=""
-            data-popper-escaped=""
-            data-popper-placement="top"
-          >
-            <ul class="py-1" aria-labelledby="dropdownButton">
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Edit
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Export Data
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-4 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Delete
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
+
         <div class="flex flex-col items-center pb-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
