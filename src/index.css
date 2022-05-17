@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.contentEditable[contenteditable="true"] {
+  background-color: #f3e8ff;
+  padding: 1rem;
+}

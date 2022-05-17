@@ -25,7 +25,6 @@ export const getUsersPosts = createAsyncThunk(
   "posts/getUsersPosts",
   async ({ username }) => {
     const { data } = await axios.get(`/api/posts/user/${username}`);
-    console.log(data);
     return data;
   }
 );
@@ -33,13 +32,36 @@ export const getUsersPosts = createAsyncThunk(
 export const createNewPost = createAsyncThunk(
   "posts/createNewPost",
   async ({ newPost, token }) => {
-    console.log(newPost);
     const { data } = await axios.post(
       "/api/posts",
       { postData: newPost },
       { headers: { authorization: token } }
     );
 
+    return data;
+  }
+);
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ id, token }) => {
+    const { data } = await axios.delete(`/api/posts/${id}`, {
+      headers: { authorization: token },
+    });
+
+    return data;
+  }
+);
+export const updatePost = createAsyncThunk(
+  "posts/updatePost",
+  async ({ editPost, id, token }) => {
+    const { data } = await axios.post(
+      `/api/posts/edit/${id}`,
+      { postData: editPost },
+      {
+        headers: { authorization: token },
+      }
+    );
+    console.log(data);
     return data;
   }
 );
@@ -102,6 +124,34 @@ const postSlice = createSlice({
       toast.success("New post is created!");
     });
     builder.addCase(createNewPost.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    //delete post
+    builder.addCase(deletePost.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.posts = action.payload.posts;
+      toast.success("Post deleted !");
+    });
+    builder.addCase(deletePost.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    //edit post
+    builder.addCase(updatePost.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(updatePost.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.posts = action.payload.posts;
+      toast.success("Post Updated !");
+    });
+    builder.addCase(updatePost.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message;
     });
