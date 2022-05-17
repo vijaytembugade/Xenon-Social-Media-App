@@ -1,7 +1,13 @@
 import React from "react";
-import Posts from "../Components/Posts/Posts";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+import Posts from "../../../Components/Posts/Posts";
+import UsersList from "../../../Components/UsersList/UsersList";
+import { authActions } from "../../Auth/Slice/authSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const { username, email } = useSelector((store) => store.auth);
   return (
     <div className="flex flex-col justify-evenly items-center">
       <div class="max-w-sm md:w-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-full  h-fit">
@@ -79,30 +85,49 @@ const Profile = () => {
             />
           </svg>
           <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            Bonnie Green
+            {username}
           </h5>
-          <span class="text-sm text-gray-500 dark:text-gray-400">
-            Visual Designer
-          </span>
+          <span class="text-sm text-gray-500 dark:text-gray-400">{email}</span>
           <div class="flex mt-4 space-x-3 lg:mt-6">
-            <a
-              href="#"
-              class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Add friend
-            </a>
-            <a
+            <button
               href="#"
               class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
             >
-              Message
-            </a>
+              Follow
+            </button>
+            <button
+              onClick={() => dispatch(authActions.userLogout())}
+              className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
       <div className="p-16 flex flex-col gap-12 items-center">
-        <span className="text-2xl font-bold">Your Posts</span>
-        <Posts />
+        <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+          <li className="mr-2">
+            <NavLink
+              to="posts"
+              aria-current="page"
+              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
+            >
+              Your Posts
+            </NavLink>
+          </li>
+          <li className="mr-2">
+            <NavLink
+              to="followings"
+              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
+            >
+              Following
+            </NavLink>
+          </li>
+        </ul>
+        <Routes>
+          <Route path="posts" element={<Posts />} />
+          <Route path="followings" element={<UsersList />} />
+        </Routes>
       </div>
     </div>
   );

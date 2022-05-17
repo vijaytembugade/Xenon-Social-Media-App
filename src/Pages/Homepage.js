@@ -1,10 +1,11 @@
 import React from "react";
 import Posts from "../Components/Posts/Posts";
 import Sidebar from "../Components/Sidebar/Sidebar";
+import UsersList from "../Components/UsersList/UsersList";
 
 const Homepage = () => {
   return (
-    <div className="flex flex-row justify-center ">
+    <div className="flex flex-row justify-center max-w-screen-2xl">
       <div className="hidden lg:basis-1/6 md:overflow-y-hidden md:hidden lg:block">
         <Sidebar />
       </div>
@@ -12,7 +13,7 @@ const Homepage = () => {
         <Posts />
       </div>
       <div className="hidden md:hidden lg:basis-1/6 md:overflow-y-auto lg:block">
-        Extra
+        <UsersList />
       </div>
     </div>
   );

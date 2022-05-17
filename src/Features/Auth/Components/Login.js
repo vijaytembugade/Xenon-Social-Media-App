@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../../Components/Loader/Loader";
+import { userLogin } from "../Slice/authSlice";
 
 const Login = () => {
+  const authState = useSelector((store) => store.auth);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { status, isLoggedIn } = authState;
+  const dispatch = useDispatch();
+  const from = location.state?.from || "/";
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(userLogin({ username, password }));
+  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, isLoggedIn]);
+
   return (
     <div className="flex flex-col-reverse md:flex-row justify-evenly items-center  pt-16 gap-4">
       <div className="w-64 md:w-80 ">
@@ -22,8 +46,10 @@ const Login = () => {
           <li className="hover:text-pink-600">Conclude</li>
         </ul>
       </div>
-
-      <form className="w-60 md:w-80 border-2 py-4  rounded-md flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-60 md:w-80 border-2 py-4  rounded-md flex flex-col items-center"
+      >
         <span className="text-3xl font-semibold mb-8 border-b-2">Login</span>
         <div class="mb-6">
           <label
@@ -36,6 +62,8 @@ const Login = () => {
             type="text"
             id="default-input"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div class="mb-6">
@@ -49,19 +77,27 @@ const Login = () => {
             type="password"
             id="default-input"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="pb-4 border-b-2">
-          <button
-            type="button"
-            class="w-32 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-          >
-            Login
-          </button>
-        </div>
+        {status === "idle" && (
+          <div className="pb-4 border-b-2">
+            <button
+              type="submit"
+              class="w-32 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              Login
+            </button>
+          </div>
+        )}
+        {status === "pending" && <Loader />}
         <div className="pt-4">
           <button
             type="button"
+            onClick={() => {
+              dispatch(userLogin({ username: "vijay", password: "vijay123" }));
+            }}
             class="w-32 text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
           >
             Guest Login
