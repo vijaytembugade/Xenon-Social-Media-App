@@ -16,9 +16,8 @@ const CommentModal = ({ postId }) => {
 
   useEffect(() => {
     dispatch(getAllComments({ postId }));
-
     return () => dispatch(commentsActions.unsubscribeToAllComment());
-  }, [dispatch]);
+  }, [dispatch, postId]);
 
   function handleCreateNewComment() {
     dispatch(createNewComment({ comment: comment, id: postId, token }));

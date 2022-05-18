@@ -96,8 +96,18 @@ const Profile = () => {
         {status === "pending" && <Loader />}
         {status === "idle" && (
           <Routes>
-            <Route path="" element={<Posts posts={posts} />} />
-            <Route path="posts" element={<Posts posts={posts} />} />
+            <Route
+              path=""
+              element={posts.map((post) => {
+                return <Posts post={post} />;
+              })}
+            />
+            <Route
+              path="posts"
+              element={posts.map((post) => {
+                return <Posts post={post} />;
+              })}
+            />
             <Route path="followings" element={<UsersList />} />
           </Routes>
         )}

@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateComment } from "../Slice/commentsSlice";
+import {
+  deleteComment,
+  downvoteComment,
+  updateComment,
+  upvoteComment,
+} from "../Slice/commentsSlice";
 
 const CommentsList = ({ comment, postId }) => {
   const dispatch = useDispatch();
-  const [newComment, setNewComments] = useState(comment);
+  const [newComment, setNewComments] = useState([]);
   const { token, username } = useSelector((store) => store.auth);
   const [editableComment, setEditableComment] = useState({
     isEditable: false,
     commentId: "",
   });
 
+  useEffect(() => {
+    setNewComments(comment);
+  }, [comment]);
+
   function handleUpdateComment() {
     dispatch(updateComment({ commentData: newComment, token, postId }));
     setEditableComment({ isEditable: false, commentId: "" });
+  }
+
+  function handleUpvote() {
+    dispatch(upvoteComment({ postId, commentId: newComment._id, token }));
+  }
+  function handleDownvote() {
+    dispatch(downvoteComment({ postId, commentId: newComment._id, token }));
+  }
+  function handleDeleteComment() {
+    dispatch(deleteComment({ postId, commentId: newComment._id, token }));
   }
 
   return (
@@ -38,12 +57,13 @@ const CommentsList = ({ comment, postId }) => {
         )}
 
         {editableComment.commentId !== newComment._id && (
-          <div className="hidden group-hover:block" title="upvote">
+          <div className=" hidden group-hover:flex items-center" title="upvote">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-5 cursor-pointer hover:text-pink-500"
               viewBox="0 0 20 20"
               fill="currentColor"
+              onClick={handleUpvote}
             >
               <path
                 fillRule="evenodd"
@@ -51,15 +71,22 @@ const CommentsList = ({ comment, postId }) => {
                 clipRule="evenodd"
               />
             </svg>
+            <p className="text-slate-400">
+              ({newComment?.votes?.upvotedBy?.length})
+            </p>
           </div>
         )}
         {editableComment.commentId !== newComment._id && (
-          <div className="hidden group-hover:block" title="downvote">
+          <div
+            className="hidden group-hover:flex items-center"
+            title="downvote"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-5 cursor-pointer hover:text-pink-500"
               viewBox="0 0 20 20"
               fill="currentColor"
+              onClick={handleDownvote}
             >
               <path
                 fillRule="evenodd"
@@ -67,6 +94,9 @@ const CommentsList = ({ comment, postId }) => {
                 clipRule="evenodd"
               />
             </svg>
+            <p className="text-slate-400">
+              ({newComment?.votes?.downvotedBy?.length})
+            </p>
           </div>
         )}
 
@@ -105,6 +135,7 @@ const CommentsList = ({ comment, postId }) => {
                 className="h-4 w-4 hover:text-red-500"
                 viewBox="0 0 20 20"
                 fill="currentColor"
+                onClick={handleDeleteComment}
               >
                 <path
                   fillRule="evenodd"

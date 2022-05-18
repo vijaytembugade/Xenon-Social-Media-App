@@ -44,6 +44,44 @@ export const updateComment = createAsyncThunk(
   }
 );
 
+export const upvoteComment = createAsyncThunk(
+  "comments/upvoteComment",
+  async ({ postId, commentId, token }) => {
+    const { data } = await axios.post(
+      `/api/comments/upvote/${postId}/${commentId}`,
+      {},
+      { headers: { authorization: token } }
+    );
+    console.log(data);
+    return data;
+  }
+);
+export const downvoteComment = createAsyncThunk(
+  "comments/downvoteComment",
+  async ({ postId, commentId, token }) => {
+    const { data } = await axios.post(
+      `/api/comments/downvote/${postId}/${commentId}`,
+      {},
+
+      { headers: { authorization: token } }
+    );
+    return data;
+  }
+);
+export const deleteComment = createAsyncThunk(
+  "comments/deleteComment",
+  async ({ postId, commentId, token }) => {
+    const { data } = await axios.post(
+      `/api/comments/delete/${postId}/${commentId}`,
+      {},
+      { headers: { authorization: token } }
+    );
+
+    console.log(data);
+    return data;
+  }
+);
+
 const commentsSlice = createSlice({
   name: "comments",
   initialState,
@@ -93,6 +131,49 @@ const commentsSlice = createSlice({
       state.error = action.error.message;
       state.status = "error";
       toast.error("Something went wrong");
+    });
+
+    //upvote the comment
+    builder.addCase(upvoteComment.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(upvoteComment.fulfilled, (state, action) => {
+      state.comments = action.payload.comments;
+      state.status = "idle";
+    });
+    builder.addCase(upvoteComment.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = "error";
+      toast.error(action.error.message);
+    });
+
+    //upvote the comment
+    builder.addCase(downvoteComment.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(downvoteComment.fulfilled, (state, action) => {
+      state.comments = action.payload.comments;
+      state.status = "idle";
+    });
+    builder.addCase(downvoteComment.rejected, (state, action) => {
+      state.error = action.error.message;
+      state.status = "error";
+      toast.error(action.error.message);
+    });
+
+    //delete comments
+    builder.addCase(deleteComment.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(deleteComment.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.comments = action.payload.comments;
+      toast.success("Comment Deleted!");
+    });
+    builder.addCase(deleteComment.rejected, (state) => {
+      state.error = action.error.message;
+      state.status = "error";
+      toast.error(action.error.message);
     });
   },
 });
