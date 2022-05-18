@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
-import { Loader, Posts, UsersList } from "../../../Components";
-import Modal from "../../../Components/Modal/Modal";
+import { Loader, Posts, UsersList, Modal } from "../../../Components";
 import { authActions } from "../../Auth/Slice/authSlice";
 import { getUsersPosts } from "../../Posts/Slice/postSlice";
 import ProfileEditModal from "./ProfileEditModal";

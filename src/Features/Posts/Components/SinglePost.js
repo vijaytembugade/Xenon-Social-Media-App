@@ -5,7 +5,6 @@ import { Loader } from "../../../Components";
 import { newPostReducer } from "../../../reducers";
 import { deletePost, postActions, updatePost } from "../Slice/postSlice";
 import { getSinglePost } from "../Slice/postSlice";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import Moment from "react-moment";
 
 const SinglePost = () => {
