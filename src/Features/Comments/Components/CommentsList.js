@@ -37,7 +37,7 @@ const CommentsList = ({ comment, postId }) => {
 
   return (
     <div>
-      <div className="flex gap-4 items-center border-b-2 p-2 group">
+      <div className="w-64 md:w-80 flex gap-4 items-center border-b-2 p-2 group">
         {editableComment.isEditable &&
         editableComment.commentId === newComment._id ? (
           <input
@@ -78,7 +78,7 @@ const CommentsList = ({ comment, postId }) => {
         )}
         {editableComment.commentId !== newComment._id && (
           <div
-            className="hidden group-hover:flex items-center"
+            className="hidden cursor-pointer group-hover:flex items-center"
             title="downvote"
           >
             <svg
@@ -103,7 +103,7 @@ const CommentsList = ({ comment, postId }) => {
         {newComment.username === username &&
           editableComment.commentId !== newComment._id && (
             <div
-              className="hidden group-hover:block"
+              className="hidden group-hover:block cursor-pointer"
               title="edit comment"
               onClick={() =>
                 setEditableComment((prevState) => ({
@@ -129,7 +129,10 @@ const CommentsList = ({ comment, postId }) => {
           )}
         {newComment.username === username &&
           editableComment.commentId !== newComment._id && (
-            <div className="hidden group-hover:block" title="delete comment">
+            <div
+              className="hidden group-hover:block cursor-pointer"
+              title="delete comment"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 hover:text-red-500"
