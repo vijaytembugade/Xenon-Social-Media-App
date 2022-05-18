@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = ({ w = 8, h = 8, text = "" }) => {
+const Loader = ({ w = 6, h = 6, text = "" }) => {
   return (
     <div className="flex gap-2">
       <svg
