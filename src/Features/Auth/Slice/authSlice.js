@@ -36,6 +36,19 @@ export const userSignup = createAsyncThunk(
   }
 );
 
+export const updateUserProfile = createAsyncThunk(
+  "auth/updateUserProfile",
+  async ({ userData, token }) => {
+    const { data } = await axios.post(
+      "/api/users/edit",
+      { userData },
+      { headers: { authorization: token } }
+    );
+    console.log(data);
+    return data;
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -49,6 +62,12 @@ const authSlice = createSlice({
       localStorage.removeItem("USER_DETAILS");
 
       toast.success("Logged Out!");
+    },
+
+    //username update
+    userUpdate: (state, action) => {
+      state.username = action.payload.username;
+      state.email = action.payload.email;
     },
   },
   extraReducers: (builder) => {
@@ -104,6 +123,29 @@ const authSlice = createSlice({
       state.status = "error";
       state.erorr = action.error.message;
       toast.error(action.error.message);
+    });
+
+    //update user profile
+    builder.addCase(updateUserProfile.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(updateUserProfile.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.username = action.payload.user.username;
+      state.email = action.payload.user.email;
+      localStorage.setItem(
+        "USER_DETAILS",
+        JSON.stringify({
+          username: action.payload.user.username,
+          token: state.token,
+          email: action.payload.user.email,
+        })
+      );
+      toast.success("Profile Updated!");
+    });
+    builder.addCase(updateUserProfile.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
     });
   },
 });

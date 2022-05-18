@@ -3,17 +3,20 @@ import { getAllPosts } from "../Features/Posts/Slice/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Loader, Posts, Sidebar, UsersList } from "../Components";
+import { getAllUsers } from "../Features/User/Slice/usersSlice";
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const { posts, status } = useSelector((store) => store.posts);
+  const { users, status: usersStatus } = useSelector((store) => store.users);
 
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (
-    <div className="flex flex-row justify-center max-w-screen-2xl">
+    <div className="flex flex-row justify-center max-w-screen-xl">
       <div className="hidden lg:basis-1/6 md:overflow-y-hidden md:hidden lg:block">
         <Sidebar />
       </div>
@@ -22,7 +25,8 @@ const Homepage = () => {
         {status === "idle" && <Posts posts={posts} />}
       </div>
       <div className="hidden md:hidden lg:basis-1/6 md:overflow-y-auto lg:block">
-        <UsersList />
+        <span className="text-xl m-4">UserList</span>
+        {usersStatus === "idle" && <UsersList users={users} />}
       </div>
     </div>
   );

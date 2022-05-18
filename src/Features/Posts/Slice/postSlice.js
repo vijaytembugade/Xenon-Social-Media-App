@@ -136,6 +136,7 @@ const postSlice = createSlice({
       state.status = "idle";
       state.posts = action.payload.posts;
       toast.success("Post deleted !");
+      state.singlePost = null;
     });
     builder.addCase(deletePost.rejected, (state, action) => {
       state.status = "error";
