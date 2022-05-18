@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import Loader from "../../../Components/Loader/Loader";
 import { userLogin } from "../Slice/authSlice";
+import { Loader } from "../../../Components";
 
 const Login = () => {
   const authState = useSelector((store) => store.auth);

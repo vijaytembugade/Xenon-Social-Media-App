@@ -8,7 +8,7 @@ const Toast = () => {
         position="bottom-right"
         reverseOrder={false}
         toastOptions={{
-          className: "bg-purple-200 text-black",
+          className: "bg-pink-200 text-black shadow-lg",
           duration: 3000,
         }}
       />
@@ -16,4 +16,4 @@ const Toast = () => {
   );
 };
 
-export default Toast;
+export { Toast };

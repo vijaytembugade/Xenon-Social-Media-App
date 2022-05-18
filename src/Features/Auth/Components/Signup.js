@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import Loader from "../../../Components/Loader/Loader";
+import { Loader } from "../../../Components";
 import { userSignup } from "../Slice/authSlice";
 
 const Signup = () => {

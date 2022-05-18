@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, Route, Routes } from "react-router-dom";
-import Posts from "../../../Components/Posts/Posts";
-import UsersList from "../../../Components/UsersList/UsersList";
+import { NavLink, Route, Routes } from "react-router-dom";
+import { Loader, Posts, UsersList } from "../../../Components";
 import { authActions } from "../../Auth/Slice/authSlice";
+import { getUsersPosts } from "../../Posts/Slice/postSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const { username, email } = useSelector((store) => store.auth);
+  const { posts, status } = useSelector((store) => store.posts);
+
+  useEffect(() => {
+    dispatch(getUsersPosts({ username }));
+  }, [dispatch, username]);
+
   return (
     <div className="flex flex-col justify-evenly items-center">
       <div class="max-w-sm md:w-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-full  h-fit">
@@ -124,10 +130,14 @@ const Profile = () => {
             </NavLink>
           </li>
         </ul>
-        <Routes>
-          <Route path="posts" element={<Posts />} />
-          <Route path="followings" element={<UsersList />} />
-        </Routes>
+        {status === "pending" && <Loader />}
+        {status === "idle" && (
+          <Routes>
+            <Route path="" element={<Posts posts={posts} />} />
+            <Route path="posts" element={<Posts posts={posts} />} />
+            <Route path="followings" element={<UsersList />} />
+          </Routes>
+        )}
       </div>
     </div>
   );

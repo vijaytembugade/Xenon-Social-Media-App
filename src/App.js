@@ -1,14 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Navbar from "./Components/Headers/Navbar";
 import Login from "./Features/Auth/Components/Login";
 import Signup from "./Features/Auth/Components/Signup";
-import Profile from "./Features/Profile/Components/Profile";
+import Profile from "./Features/User/Components/Profile";
 import NewPost from "./Features/Posts/Components/NewPost";
 import Homepage from "./Pages/Homepage";
-import Toast from "./Components/Toast/Toast";
-import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
-import Posts from "./Components/Posts/Posts";
+import SinglePost from "./Features/Posts/Components/SinglePost";
+import { PrivateRoutes, Toast, Navbar } from "./Components";
 
 function App() {
   return (
@@ -18,6 +16,7 @@ function App() {
       <div className="px-8 md:px-16 py-8 md:py-16 mt-16 ">
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/post/:id" element={<SinglePost />} />
           <Route
             path="/new-post"
             element={
@@ -34,8 +33,6 @@ function App() {
               </PrivateRoutes>
             }
           />
-          {/* <Route to="posts" element={<Posts />} />
-            <Route to="followings"></Route> */}
 
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Signup />} />
