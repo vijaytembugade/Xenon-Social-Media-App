@@ -9,12 +9,16 @@ import ProfileEditModal from "./ProfileEditModal";
 const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const { username, email } = useSelector((store) => store.auth);
+  const { username, email, following, followers } = useSelector(
+    (store) => store.auth
+  );
   const { posts, status } = useSelector((store) => store.posts);
 
   useEffect(() => {
     dispatch(getUsersPosts({ username }));
   }, [dispatch, username]);
+
+  console.log(followers);
 
   return (
     <div className="flex flex-col justify-evenly items-center">
@@ -92,6 +96,14 @@ const Profile = () => {
               Following
             </NavLink>
           </li>
+          <li className="mr-2">
+            <NavLink
+              to="followers"
+              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
+            >
+              Followers
+            </NavLink>
+          </li>
         </ul>
         {status === "pending" && <Loader />}
         {status === "idle" && (
@@ -108,7 +120,11 @@ const Profile = () => {
                 return <Posts post={post} />;
               })}
             />
-            <Route path="followings" element={<UsersList />} />
+            <Route
+              path="followings"
+              element={<UsersList users={following} />}
+            />
+            <Route path="followers" element={<UsersList users={followers} />} />
           </Routes>
         )}
       </div>

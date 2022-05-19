@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Components";
 import {
   commentsActions,
@@ -9,8 +11,9 @@ import {
 import { CommentsList } from "./CommentsList";
 
 const CommentModal = ({ postId }) => {
+  const navigate = useNavigate();
   const [comment, setComment] = useState("");
-  const { token, username } = useSelector((store) => store.auth);
+  const { token, isLoggedIn } = useSelector((store) => store.auth);
   const { status, comments } = useSelector((store) => store.comments);
   const dispatch = useDispatch();
 
@@ -20,8 +23,13 @@ const CommentModal = ({ postId }) => {
   }, [dispatch, postId]);
 
   function handleCreateNewComment() {
-    dispatch(createNewComment({ comment: comment, id: postId, token }));
-    setComment("");
+    if (isLoggedIn) {
+      dispatch(createNewComment({ comment: comment, id: postId, token }));
+      setComment("");
+    } else {
+      toast("Please Login first!", { icon: "🤗" });
+      navigate("/login");
+    }
   }
   return (
     <div>

@@ -11,6 +11,8 @@ const initialState = {
   isLoggedIn: getLocaldata?.token ? true : false,
   status: "idle",
   error: null,
+  following: [],
+  followers: [],
 };
 
 export const userLogin = createAsyncThunk(
@@ -20,6 +22,7 @@ export const userLogin = createAsyncThunk(
       username,
       password,
     });
+    console.log(data);
     return data;
   }
 );
@@ -44,7 +47,28 @@ export const updateUserProfile = createAsyncThunk(
       { userData },
       { headers: { authorization: token } }
     );
-    console.log(data);
+    return data;
+  }
+);
+export const followUser = createAsyncThunk(
+  "auth/followUser",
+  async ({ followUserId, token }) => {
+    const { data } = await axios.post(
+      `/api/users/follow/${followUserId}`,
+      {},
+      { headers: { authorization: token } }
+    );
+    return data;
+  }
+);
+export const unFollowUser = createAsyncThunk(
+  "auth/unFollowUser",
+  async ({ followUserId, token }) => {
+    const { data } = await axios.post(
+      `/api/users/unfollow/${followUserId}`,
+      {},
+      { headers: { authorization: token } }
+    );
     return data;
   }
 );
@@ -81,6 +105,8 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.username = payload.foundUser.username;
       state.email = payload.foundUser.email;
+      state.followers = payload.foundUser.followers;
+      state.following = payload.foundUser.following;
       localStorage.setItem(
         "USER_DETAILS",
         JSON.stringify({
@@ -144,6 +170,34 @@ const authSlice = createSlice({
       toast.success("Profile Updated!");
     });
     builder.addCase(updateUserProfile.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    //follow user
+    builder.addCase(followUser.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(followUser.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.followers = action.payload.user.followers;
+      state.following = action.payload.user.following;
+    });
+    builder.addCase(followUser.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.error.message;
+    });
+
+    //unfollow user
+    builder.addCase(unFollowUser.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(unFollowUser.fulfilled, (state, action) => {
+      state.status = "idle";
+      state.followers = action.payload.user.followers;
+      state.following = action.payload.user.following;
+    });
+    builder.addCase(unFollowUser.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message;
     });

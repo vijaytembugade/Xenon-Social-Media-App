@@ -6,22 +6,27 @@ import CommentModal from "../../Features/Comments/Components/CommentModal";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../Features/Posts/Slice/postSlice";
 import { Loader } from "../Loader/Loader";
+import toast from "react-hot-toast";
 
 export const Posts = ({ post }) => {
-  console.log(post);
   const [showModal, setShowModal] = useState(false);
-  const { likedLoading } = useSelector((store) => store.posts);
-  const { token, username } = useSelector((store) => store.auth);
+
+  const { token, username, isLoggedIn } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   const isLikedByCurrentUser = post?.likes.likedBy?.some(
     (list) => list.username === username
   );
   function handleLikePost() {
-    dispatch(likePost({ postId: post._id, token }));
+    if (isLoggedIn) {
+      dispatch(likePost({ postId: post._id, token }));
+    }
+    toast("Please Login ", { icon: "😊" });
   }
   function handleDislikePost() {
-    dispatch(dislikePost({ postId: post._id, token }));
+    if (isLoggedIn) {
+      dispatch(dislikePost({ postId: post._id, token }));
+    }
   }
   return (
     <>

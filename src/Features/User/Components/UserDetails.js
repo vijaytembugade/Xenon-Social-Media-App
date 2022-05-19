@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Loader, MiniPost } from "../../../Components";
+import { followUser, unFollowUser } from "../../Auth/Slice/authSlice";
 import { getUsersPosts } from "../../Posts/Slice/postSlice";
 import { getSingleUsers, userActions } from "../Slice/usersSlice";
 
@@ -9,8 +10,13 @@ const UserDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { singleUser, status } = useSelector((store) => store.users);
-  const { username } = useSelector((store) => store.auth);
+  const { username, isLoggedIn, token, following } = useSelector(
+    (store) => store.auth
+  );
   const { posts, status: postStatus } = useSelector((store) => store.posts);
+
+  const isUserIamFollowing = following.some((user) => user._id === id);
+
   useEffect(() => {
     dispatch(getSingleUsers({ id }));
     return () => dispatch(userActions.unsubscribeToSingleUser());
@@ -21,6 +27,17 @@ const UserDetails = () => {
       dispatch(getUsersPosts({ username: singleUser.username }));
     }
   }, [singleUser]);
+
+  function handleFollow() {
+    if (isLoggedIn) {
+      dispatch(followUser({ followUserId: singleUser._id, token }));
+    }
+  }
+  function handleUnFollow() {
+    if (isLoggedIn) {
+      dispatch(unFollowUser({ followUserId: singleUser._id, token }));
+    }
+  }
   return (
     <>
       {status === "pending" && <Loader />}
@@ -42,11 +59,26 @@ const UserDetails = () => {
                   {singleUser?.email}
                 </span>
               </div>
-              <div class="flex mt-4 space-x-3 lg:mt-6">
-                <button className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Follow
-                </button>
-              </div>
+              {singleUser?.username !== username && (
+                <div class="flex mt-4 space-x-3 lg:mt-6">
+                  {!isUserIamFollowing && (
+                    <button
+                      onClick={handleFollow}
+                      className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-blue-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+                    >
+                      Follow
+                    </button>
+                  )}
+                  {isUserIamFollowing && (
+                    <button
+                      onClick={handleUnFollow}
+                      className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-slate-700 rounded-lg hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+                    >
+                      Unfollow
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="md:basis-4/6 h-96 overflow-y-auto w-full">
