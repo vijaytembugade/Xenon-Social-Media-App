@@ -6,3 +6,4 @@ export { Sidebar } from "./Sidebar/Sidebar";
 export { Toast } from "./Toast/Toast";
 export { UsersList } from "./UsersList/UsersList";
 export { Modal } from "./Modal/Modal";
+export { MiniPost } from "./MiniPost/MiniPost";
