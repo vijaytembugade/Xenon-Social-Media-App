@@ -18,8 +18,6 @@ const Profile = () => {
     dispatch(getUsersPosts({ username }));
   }, [dispatch, username]);
 
-  console.log(followers);
-
   return (
     <div className="flex flex-col justify-evenly items-center">
       {showModal && (
