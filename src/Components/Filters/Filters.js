@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postActions } from "../../Features/Posts/Slice/postSlice";
 import { useOnClickOutside } from "../../hooks";
+import { sortByService } from "../../services";
 
 const Filters = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -10,30 +11,13 @@ const Filters = () => {
   const { posts } = useSelector((store) => store.posts);
   const dispatch = useDispatch();
 
-  const sortByFunc = (posts) => {
-    const temp = posts.slice();
-    if (sortBy === "Latest") {
-      temp.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
-    }
-
-    if (sortBy === "Oldest") {
-      temp.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
-    }
-
-    if (sortBy === "Trending") {
-      temp.sort((a, b) => b?.likes?.likeCount - a?.likes?.likeCount);
-    }
-
-    return temp;
-  };
-
   useEffect(() => {
-    dispatch(postActions.setSortedPosts(sortByFunc(posts)));
+    dispatch(postActions.setSortedPosts(sortByService(sortBy, posts)));
   }, [sortBy, dispatch]);
 
   useOnClickOutside(filterRef, () => setShowFilter(false));
   return (
-    <div className="relative z-[0] md:left-[200px]">
+    <div className="relative md:left-[200px]">
       <button
         onClick={() => setShowFilter(true)}
         type="button"

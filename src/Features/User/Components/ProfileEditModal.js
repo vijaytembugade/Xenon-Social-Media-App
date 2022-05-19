@@ -1,23 +1,44 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions, updateUserProfile } from "../../Auth/Slice/authSlice";
+import { checkImgUrl } from "../../../services";
+import { updateUserProfile } from "../../Auth/Slice/authSlice";
 
-const ProfileEditModal = ({ username, email, setShowModal }) => {
-  const [editableUsername, setUsername] = useState(username);
-  const [editableEmail, setEmail] = useState(email);
-
+const ProfileEditModal = ({
+  username,
+  email,
+  imgUrl,
+  firstName,
+  lastName,
+  setShowModal,
+}) => {
   const { token } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
+  const [editableUsername, setUsername] = useState(username);
+  const [editableEmail, setEmail] = useState(email);
+  const [editImgUrl, setImgUrl] = useState(imgUrl);
+  const [editFirstName, setFirstName] = useState(firstName);
+  const [editLastname, setLastName] = useState(lastName);
+
   const handleUpdateProfile = () => {
-    console.log("hello");
-    dispatch(
-      updateUserProfile({
-        userData: { username: editableUsername, email: editableEmail },
-        token,
-      })
-    );
-    setShowModal(false);
+    if (checkImgUrl(editImgUrl)) {
+      dispatch(
+        updateUserProfile({
+          userData: {
+            username: editableUsername,
+            email: editableEmail,
+            imgUrl: editImgUrl,
+            firstName: editFirstName,
+            lastName: editLastname,
+          },
+          token,
+        })
+      );
+      setShowModal(false);
+    } else {
+      toast.error("Invalid Image URL");
+    }
   };
   return (
     <div>
@@ -29,11 +50,12 @@ const ProfileEditModal = ({ username, email, setShowModal }) => {
           Username
         </label>
         <input
-          value={editableUsername}
-          onChange={(e) => setUsername(e.target.value)}
           type="text"
-          id="default-input"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+          title="You cannot update your username"
+          id="disabled-input"
+          class="mb-6 bg-gray-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 cursor-not-allowed dark:focus:ring-purple-500 dark:focus:border-purple-500"
+          value={editableUsername}
+          disabled
         />
       </div>
       <div className="mb-6">
@@ -46,6 +68,51 @@ const ProfileEditModal = ({ username, email, setShowModal }) => {
         <input
           value={editableEmail}
           onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          id="default-input"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+        />
+      </div>
+      <div className="mb-6">
+        <label
+          for="default-input"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >
+          First Name
+        </label>
+        <input
+          value={editFirstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          type="text"
+          id="default-input"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+        />
+      </div>
+      <div className="mb-6">
+        <label
+          for="default-input"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >
+          Last Name
+        </label>
+        <input
+          value={editLastname}
+          onChange={(e) => setLastName(e.target.value)}
+          type="text"
+          id="default-input"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+        />
+      </div>
+      <div className="mb-6">
+        <label
+          for="default-input"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >
+          image URL
+        </label>
+        <input
+          value={editImgUrl}
+          onChange={(e) => setImgUrl(e.target.value)}
           type="text"
           id="default-input"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"

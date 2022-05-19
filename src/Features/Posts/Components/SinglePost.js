@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../../../Components";
 import { newPostReducer } from "../../../reducers";
 import { deletePost, postActions, updatePost } from "../Slice/postSlice";
@@ -10,20 +10,18 @@ import CommentModal from "../../Comments/Components/CommentModal";
 import { bookmarkPost, removeBookmarkPost } from "../../User/Slice/usersSlice";
 
 const SinglePost = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { token, username, isLoggedIn } = useSelector((store) => store.auth);
+  const { singlePost, status } = useSelector((store) => store.posts);
+  const { bookmarks } = useSelector((store) => store.users);
   const [isEditable, setIsEditable] = useState(false);
-
   const [editPost, editPostDispatch] = useReducer(newPostReducer, {
     title: "",
     content: "",
     isPublic: true,
   });
-
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { token, username, isLoggedIn } = useSelector((store) => store.auth);
-  const { singlePost, status } = useSelector((store) => store.posts);
-  const { bookmarks } = useSelector((store) => store.users);
 
   useEffect(() => {
     dispatch(getSinglePost({ id }));
@@ -72,6 +70,28 @@ const SinglePost = () => {
   return (
     <div className="flex flex-col md:flex-row justify-evenly flex-wrap ">
       <div className="flex flex-col justify-center items-center">
+        {status === "idle" && (
+          <Link
+            to="/"
+            className="flex gap-2 border-2 p-2 bg-gray-200 font-semibold rounded-md self-start hover:border-gray-700"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+              />
+            </svg>
+            Go back
+          </Link>
+        )}
         {status === "pending" && <Loader />}
         {isEditable && <h2 className="font-bold text-3xl my-8">Edit Post</h2>}
         {status === "idle" && (

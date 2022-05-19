@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteComment,
@@ -10,7 +11,7 @@ import {
 const CommentsList = ({ comment, postId }) => {
   const dispatch = useDispatch();
   const [newComment, setNewComments] = useState([]);
-  const { token, username } = useSelector((store) => store.auth);
+  const { token, username, isLoggedIn } = useSelector((store) => store.auth);
   const [editableComment, setEditableComment] = useState({
     isEditable: false,
     commentId: "",
@@ -21,18 +22,34 @@ const CommentsList = ({ comment, postId }) => {
   }, [comment]);
 
   function handleUpdateComment() {
-    dispatch(updateComment({ commentData: newComment, token, postId }));
-    setEditableComment({ isEditable: false, commentId: "" });
+    if (isLoggedIn) {
+      dispatch(updateComment({ commentData: newComment, token, postId }));
+      setEditableComment({ isEditable: false, commentId: "" });
+    } else {
+      toast("Please Login!");
+    }
   }
 
   function handleUpvote() {
-    dispatch(upvoteComment({ postId, commentId: newComment._id, token }));
+    if (isLoggedIn) {
+      dispatch(upvoteComment({ postId, commentId: newComment._id, token }));
+    } else {
+      toast("Please Login!");
+    }
   }
   function handleDownvote() {
-    dispatch(downvoteComment({ postId, commentId: newComment._id, token }));
+    if (isLoggedIn) {
+      dispatch(downvoteComment({ postId, commentId: newComment._id, token }));
+    } else {
+      toast("Please Login!");
+    }
   }
   function handleDeleteComment() {
-    dispatch(deleteComment({ postId, commentId: newComment._id, token }));
+    if (isLoggedIn) {
+      dispatch(deleteComment({ postId, commentId: newComment._id, token }));
+    } else {
+      toast("Please Login!");
+    }
   }
 
   return (

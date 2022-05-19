@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Loader, MiniPost } from "../../../Components";
@@ -14,7 +15,6 @@ const UserDetails = () => {
     (store) => store.auth
   );
   const { posts, status: postStatus } = useSelector((store) => store.posts);
-
   const isUserIamFollowing = following.some((user) => user._id === id);
 
   useEffect(() => {
@@ -31,11 +31,15 @@ const UserDetails = () => {
   function handleFollow() {
     if (isLoggedIn) {
       dispatch(followUser({ followUserId: singleUser._id, token }));
+    } else {
+      toast("Please Login!");
     }
   }
   function handleUnFollow() {
     if (isLoggedIn) {
       dispatch(unFollowUser({ followUserId: singleUser._id, token }));
+    } else {
+      toast("Please Login!");
     }
   }
   return (
@@ -48,7 +52,11 @@ const UserDetails = () => {
               <h2 className="text-md text-gray-400">User Details</h2>
               <img
                 className="h-20 rounded-full"
-                src="/assets/profile/profile.png"
+                src={
+                  singleUser?.imgUrl
+                    ? singleUser?.imgUrl
+                    : "/assets/profile/profile.png"
+                }
                 alt=""
               />
               <div className="text-center">

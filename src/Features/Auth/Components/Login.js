@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userLogin } from "../Slice/authSlice";
 import { Loader } from "../../../Components";
 
@@ -91,7 +91,7 @@ const Login = () => {
             </button>
           </div>
         )}
-        {status === "pending" && <Loader circular={true} />}
+        {status === "pending" && <Loader w={4} h={4} circular={false} />}
         <div className="pt-4">
           <button
             type="button"
@@ -103,6 +103,12 @@ const Login = () => {
             Guest Login
           </button>
         </div>
+        <p>
+          Create New Account?{" "}
+          <Link to="/sign-up" className="text-pink-500">
+            Sign Up
+          </Link>
+        </p>
       </form>
     </div>
   );

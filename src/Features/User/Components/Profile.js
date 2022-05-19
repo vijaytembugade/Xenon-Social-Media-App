@@ -7,11 +7,10 @@ import { getUsersPosts } from "../../Posts/Slice/postSlice";
 import ProfileEditModal from "./ProfileEditModal";
 
 const Profile = () => {
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const { username, email, following, followers } = useSelector(
-    (store) => store.auth
-  );
+  const [showModal, setShowModal] = useState(false);
+  const { username, email, following, followers, imgUrl, firstName, lastName } =
+    useSelector((store) => store.auth);
   const { posts, status } = useSelector((store) => store.posts);
 
   useEffect(() => {
@@ -25,6 +24,9 @@ const Profile = () => {
           <ProfileEditModal
             username={username}
             email={email}
+            imgUrl={imgUrl}
+            firstName={firstName}
+            lastName={lastName}
             setShowModal={setShowModal}
           />
         </Modal>
@@ -41,23 +43,34 @@ const Profile = () => {
         </div>
 
         <div className="flex flex-col items-center pb-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="mb-3 w-24 h-24 rounded-full shadow-lg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          {imgUrl === "" ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mb-3 w-24 h-24 rounded-full shadow-lg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          ) : (
+            <img
+              className="mb-3 w-24 h-24 rounded-full shadow-lg"
+              src={imgUrl}
+              alt=""
             />
-          </svg>
+          )}
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
             {username}
           </h5>
+          <span className="text-sm text-gray-900 dark:text-gray-400">
+            {firstName} {lastName}
+          </span>
           <span className="text-sm text-gray-500 dark:text-gray-400">
             {email}
           </span>
@@ -71,11 +84,15 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="p-16 flex flex-col gap-12 items-center">
-        <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-          <li className="mr-2">
-            <NavLink to="posts" aria-current="page" className="p-4 block">
-              Your Posts
+      <div className="p-8 flex flex-wrap flex-col gap-8 items-center">
+        <ul className="flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+          <li className="mr-2 ">
+            <NavLink
+              to="posts"
+              aria-current="page"
+              className="p-4 block line-clamp-1"
+            >
+              Posts
             </NavLink>
           </li>
           <li className="mr-2">

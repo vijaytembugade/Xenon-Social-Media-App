@@ -11,13 +11,10 @@ const NewPost = () => {
     content: "",
     isPublic: true,
   });
-
-  const { title, content, isPublic } = newPost;
-
-  const { token, isLoggedIn } = useSelector((store) => store.auth);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { title, content, isPublic } = newPost;
+  const { token, isLoggedIn } = useSelector((store) => store.auth);
 
   function handleCreateNewPost() {
     if (isLoggedIn) {

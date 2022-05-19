@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Loader } from "../../../Components";
 import { userSignup } from "../Slice/authSlice";
 
@@ -99,13 +99,19 @@ const Signup = () => {
             {status === "idle" && (
               <button
                 type="submit"
-                className="w-32 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                className="w-32 text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
               >
                 Signup
               </button>
             )}
             {status === "error" && toast.error("Something went wrong")}
           </div>
+          <p>
+            Already have an Account?{" "}
+            <Link to="/login" className="text-purple-500">
+              Login
+            </Link>{" "}
+          </p>
         </form>
       </div>
     </div>
