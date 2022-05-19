@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -52,7 +53,10 @@ const Sidebar = () => {
         </svg>
         Notification
       </div>
-      <div className="flex flex-row items-center gap-2 bg-purple-200 rounded-md p-2 hover:bg-purple-300 hover:font-semibold cursor-pointer">
+      <Link
+        to="/bookmark"
+        className="flex flex-row items-center gap-2 bg-purple-200 rounded-md p-2 hover:bg-purple-300 hover:font-semibold cursor-pointer"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -66,7 +70,7 @@ const Sidebar = () => {
           />
         </svg>
         Bookmarks
-      </div>
+      </Link>
       <div className="flex flex-row items-center gap-2 bg-purple-200 rounded-md p-2 hover:bg-purple-300 hover:font-semibold cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

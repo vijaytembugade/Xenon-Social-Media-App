@@ -8,6 +8,7 @@ import Homepage from "./Pages/Homepage";
 import SinglePost from "./Features/Posts/Components/SinglePost";
 import { PrivateRoutes, Toast, Navbar } from "./Components";
 import UserDetails from "./Features/User/Components/UserDetails";
+import Bookmark from "./Pages/Bookmark";
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
             element={
               <PrivateRoutes>
                 <Profile />
+              </PrivateRoutes>
+            }
+          />
+          <Route
+            path="/bookmark"
+            element={
+              <PrivateRoutes>
+                <Bookmark />
               </PrivateRoutes>
             }
           />
