@@ -34,7 +34,7 @@ const CommentModal = ({ postId }) => {
   return (
     <div>
       <div>
-        <div class="mb-4 pb-2 flex flex-row gap-2 items-center justify-center border-b-2">
+        <div className="mb-4 pb-2 flex flex-row gap-2 items-center justify-center border-b-2">
           <input
             value={comment}
             onChange={(e) => setComment(e.target.value)}

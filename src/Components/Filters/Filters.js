@@ -37,7 +37,7 @@ const Filters = () => {
       <button
         onClick={() => setShowFilter(true)}
         type="button"
-        class="flex gap-2 text-black bg-slate-300 hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-md p-2 dark:bg-gray-300 "
+        className="flex gap-2 text-black bg-slate-300 hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-md p-2 dark:bg-gray-300 "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

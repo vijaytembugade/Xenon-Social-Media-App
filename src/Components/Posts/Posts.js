@@ -33,16 +33,16 @@ export const Posts = ({ post }) => {
     <>
       <div
         href="#"
-        class=" flex flex-col items-center p-4 md:p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
+        className=" flex flex-col items-center p-4 md:p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
         key={post?._id}
       >
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
           {post?.title}
         </h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
+        <p className="font-normal text-gray-700 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
           {post?.content}
         </p>
-        <p class="font-semibold mt-2 self-end text-gray-900 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
+        <p className="font-semibold mt-2 self-end text-gray-900 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
           - {post?.username}
         </p>
         <div className="flex flex-row pt-8 gap-4 max-w-sm justify-center items-center ">

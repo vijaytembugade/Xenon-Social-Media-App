@@ -44,7 +44,7 @@ const UserDetails = () => {
       {status === "idle" && (
         <div className="flex flex-col items-center md:flex-row md:justify-start md:items-start gap-20 ">
           <div className="w-60 md:w-96 border-2 flex justify-center rounded-lg  shadow-md md:basis-2/6">
-            <div class="flex flex-col gap-8 items-center pb-10">
+            <div className="flex flex-col gap-8 items-center pb-10">
               <h2 className="text-md text-gray-400">User Details</h2>
               <img
                 className="h-20 rounded-full"
@@ -52,15 +52,15 @@ const UserDetails = () => {
                 alt=""
               />
               <div className="text-center">
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                   {singleUser?.username}
                 </h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   {singleUser?.email}
                 </span>
               </div>
               {singleUser?.username !== username && (
-                <div class="flex mt-4 space-x-3 lg:mt-6">
+                <div className="flex mt-4 space-x-3 lg:mt-6">
                   {!isUserIamFollowing && (
                     <button
                       onClick={handleFollow}
@@ -95,7 +95,7 @@ const UserDetails = () => {
                   <Link
                     to="/new-post"
                     type="button"
-                    class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                    className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
                   >
                     Create New Post
                   </Link>
