@@ -13,7 +13,9 @@ const Bookmark = () => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  const bookmarkedPosts = posts.filter((post) => bookmarks.includes(post._id));
+  const bookmarkedPosts = bookmarks
+    .map((id) => posts.find((post) => post._id === id))
+    .reverse();
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -32,7 +34,7 @@ const Bookmark = () => {
           You have not bookmarked anything yet!
         </div>
       )}
-      <div className="w-80 md:w-[700px] pt-4">
+      <div className="w-80 md:w-[700px] pt-4 flex flex-col items-center justify-between">
         {status === "pending" && <Loader />}
 
         {status === "idle" &&
