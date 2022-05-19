@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const initialState = {
   users: [],
@@ -93,6 +94,7 @@ const userSlice = createSlice({
     builder.addCase(bookmarkPost.fulfilled, (state, action) => {
       state.status = "idle";
       state.bookmarks = action.payload.bookmarks;
+      toast("Post added in bookmarks", { icon: "🔖" });
     });
     builder.addCase(bookmarkPost.rejected, (state, action) => {
       state.status = "error";
@@ -106,6 +108,7 @@ const userSlice = createSlice({
     builder.addCase(removeBookmarkPost.fulfilled, (state, action) => {
       state.status = "idle";
       state.bookmarks = action.payload.bookmarks;
+      toast("Post removed from bookmarks", { icon: "👋" });
     });
     builder.addCase(removeBookmarkPost.rejected, (state, action) => {
       state.status = "error";
