@@ -20,8 +20,9 @@ export const Posts = ({ post }) => {
   function handleLikePost() {
     if (isLoggedIn) {
       dispatch(likePost({ postId: post._id, token }));
+    } else {
+      toast("Please Login ", { icon: "😊" });
     }
-    toast("Please Login ", { icon: "😊" });
   }
   function handleDislikePost() {
     if (isLoggedIn) {

@@ -14,7 +14,7 @@ const Bookmark = () => {
   }, [dispatch]);
 
   const bookmarkedPosts = bookmarks
-    .map((id) => posts.find((post) => post._id === id))
+    ?.map((id) => posts.find((post) => post._id === id))
     .reverse();
 
   return (
