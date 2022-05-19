@@ -13,7 +13,9 @@ const Bookmark = () => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  const bookmarkedPosts = posts.filter((post) => bookmarks.includes(post._id));
+  const bookmarkedPosts = bookmarks
+    ?.map((id) => posts.find((post) => post._id === id))
+    .reverse();
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -22,7 +24,7 @@ const Bookmark = () => {
         <Link
           to="/"
           type="button"
-          class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+          className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
         >
           Get back to Homepage
         </Link>
@@ -32,7 +34,7 @@ const Bookmark = () => {
           You have not bookmarked anything yet!
         </div>
       )}
-      <div className="w-80 md:w-[700px] pt-4">
+      <div className="w-80 md:w-[700px] pt-4 flex flex-col items-center justify-between">
         {status === "pending" && <Loader />}
 
         {status === "idle" &&

@@ -6,37 +6,43 @@ import CommentModal from "../../Features/Comments/Components/CommentModal";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../Features/Posts/Slice/postSlice";
 import { Loader } from "../Loader/Loader";
+import toast from "react-hot-toast";
 
 export const Posts = ({ post }) => {
-  console.log(post);
   const [showModal, setShowModal] = useState(false);
-  const { likedLoading } = useSelector((store) => store.posts);
-  const { token, username } = useSelector((store) => store.auth);
+
+  const { token, username, isLoggedIn } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   const isLikedByCurrentUser = post?.likes.likedBy?.some(
     (list) => list.username === username
   );
   function handleLikePost() {
-    dispatch(likePost({ postId: post._id, token }));
+    if (isLoggedIn) {
+      dispatch(likePost({ postId: post._id, token }));
+    } else {
+      toast("Please Login ", { icon: "😊" });
+    }
   }
   function handleDislikePost() {
-    dispatch(dislikePost({ postId: post._id, token }));
+    if (isLoggedIn) {
+      dispatch(dislikePost({ postId: post._id, token }));
+    }
   }
   return (
     <>
       <div
         href="#"
-        class=" flex flex-col items-center p-4 md:p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
+        className=" flex flex-col items-center p-4 md:p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
         key={post?._id}
       >
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">
           {post?.title}
         </h5>
-        <p class="font-normal text-gray-700 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
+        <p className="font-normal text-gray-700 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
           {post?.content}
         </p>
-        <p class="font-semibold mt-2 self-end text-gray-900 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
+        <p className="font-semibold mt-2 self-end text-gray-900 dark:text-gray-400 line-clamp-3  md:line-clamp-5">
           - {post?.username}
         </p>
         <div className="flex flex-row pt-8 gap-4 max-w-sm justify-center items-center ">

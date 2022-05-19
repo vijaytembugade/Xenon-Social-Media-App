@@ -103,6 +103,10 @@ const postSlice = createSlice({
     unsuscribeSinglePost: (state) => {
       state.singlePost = null;
     },
+
+    setSortedPosts: (state, action) => {
+      state.posts = action.payload;
+    },
   },
   extraReducers: (builder) => {
     //getAllPosts

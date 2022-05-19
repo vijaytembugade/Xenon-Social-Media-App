@@ -6,18 +6,18 @@ const Navbar = () => {
   const { isLoggedIn } = useSelector((store) => store.auth);
   return (
     <div>
-      <nav class="bg-neutral-50 border-gray-200 fixed top-0 left-0 right-0 px-2  md:px-16 py-0 rounded dark:bg-gray-800">
-        <div class="container flex flex-wrap justify-between items-center mx-auto ">
-          <Link to="/" class="flex items-center">
+      <nav className="bg-neutral-50 border-gray-200 fixed top-0 left-0 right-0 px-2  md:px-16 py-0 rounded dark:bg-gray-800">
+        <div className="container flex flex-wrap justify-between items-center mx-auto ">
+          <Link to="/" className="flex items-center">
             <img
               src="/assets/logo.png"
-              class="mr-3 h-12 sm:h-12 md:h-16"
+              className="mr-3 h-12 sm:h-12 md:h-16"
               alt="Flowbite Logo"
             />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               <img
                 src="/assets/sapienss.svg"
-                class="mr-3 h-16 sm:h-24 md:h-24 "
+                className="mr-3 h-16 sm:h-24 md:h-24 "
                 alt="Flowbite Logo"
               />
             </span>
@@ -25,12 +25,12 @@ const Navbar = () => {
           <button
             data-collapse-toggle="mobile-menu"
             type="button"
-            class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
             <svg
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ const Navbar = () => {
               ></path>
             </svg>
             <svg
-              class="hidden w-6 h-6"
+              className="hidden w-6 h-6"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -55,19 +55,19 @@ const Navbar = () => {
             </svg>
           </button>
           <div
-            class="hidden w-full h-screen md:h-auto md:block md:w-auto"
+            className="hidden w-full h-screen md:h-auto md:block md:w-auto"
             id="mobile-menu"
           >
-            <ul class="flex flex-col md:items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <ul className="flex flex-col md:items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               {isLoggedIn && (
                 <li className="">
                   <Link
                     to="/"
-                    class="flex gap-2 py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 "
+                    className="flex gap-2 py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 "
                     aria-current="page"
                   >
                     <svg
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -89,10 +89,10 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/new-post"
-                    class="flex gap-2 py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="flex gap-2 py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     <svg
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -113,10 +113,10 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/userprofile"
-                    class=" flex gap-2  py-2 pr-4 pl-3 text-gray-700 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    className=" flex gap-2  py-2 pr-4 pl-3 text-gray-700 hover:bg-purple-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   >
                     <svg
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

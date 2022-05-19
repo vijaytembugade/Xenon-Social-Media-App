@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../../../Components";
 import {
   commentsActions,
@@ -9,8 +11,9 @@ import {
 import { CommentsList } from "./CommentsList";
 
 const CommentModal = ({ postId }) => {
+  const navigate = useNavigate();
   const [comment, setComment] = useState("");
-  const { token, username } = useSelector((store) => store.auth);
+  const { token, isLoggedIn } = useSelector((store) => store.auth);
   const { status, comments } = useSelector((store) => store.comments);
   const dispatch = useDispatch();
 
@@ -20,13 +23,18 @@ const CommentModal = ({ postId }) => {
   }, [dispatch, postId]);
 
   function handleCreateNewComment() {
-    dispatch(createNewComment({ comment: comment, id: postId, token }));
-    setComment("");
+    if (isLoggedIn) {
+      dispatch(createNewComment({ comment: comment, id: postId, token }));
+      setComment("");
+    } else {
+      toast("Please Login first!", { icon: "🤗" });
+      navigate("/login");
+    }
   }
   return (
     <div>
       <div>
-        <div class="mb-4 pb-2 flex flex-row gap-2 items-center justify-center border-b-2">
+        <div className="mb-4 pb-2 flex flex-row gap-2 items-center justify-center border-b-2">
           <input
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -43,7 +51,9 @@ const CommentModal = ({ postId }) => {
             className="w-28 afocus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
           >
             {(status === "idle" || status === "error") && "Comment"}
-            {status === "pending" && <Loader w={6} h={6} text={"loading"} />}
+            {status === "pending" && (
+              <Loader w={6} h={6} text={"loading"} circular={true} />
+            )}
           </button>
         </div>
         <div>
