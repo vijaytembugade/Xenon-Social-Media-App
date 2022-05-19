@@ -95,7 +95,7 @@ const Signup = () => {
             />
           </div>
           <div className="">
-            {status === "pending" && <Loader />}
+            {status === "pending" && <Loader circular={true} />}
             {status === "idle" && (
               <button
                 type="submit"

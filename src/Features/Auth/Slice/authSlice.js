@@ -182,10 +182,12 @@ const authSlice = createSlice({
       state.status = "idle";
       state.followers = action.payload.user.followers;
       state.following = action.payload.user.following;
+      toast.success("Followed Successfully");
     });
     builder.addCase(followUser.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message;
+      toast.error("Something wen twrong, please try after sometime");
     });
 
     //unfollow user
@@ -196,10 +198,12 @@ const authSlice = createSlice({
       state.status = "idle";
       state.followers = action.payload.user.followers;
       state.following = action.payload.user.following;
+      toast.success("Unfollowed Successfully");
     });
     builder.addCase(unFollowUser.rejected, (state, action) => {
       state.status = "error";
       state.error = action.error.message;
+      toast.error("Something wen twrong, please try after sometime");
     });
   },
 });

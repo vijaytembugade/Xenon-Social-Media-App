@@ -91,7 +91,7 @@ const Login = () => {
             </button>
           </div>
         )}
-        {status === "pending" && <Loader />}
+        {status === "pending" && <Loader circular={true} />}
         <div className="pt-4">
           <button
             type="button"
