@@ -27,10 +27,16 @@ const Bookmark = () => {
           Get back to Homepage
         </Link>
       </div>
+      {bookmarkedPosts?.length === 0 && (
+        <div className="text-gray-500 text-lg">
+          You have not bookmarked anything yet!
+        </div>
+      )}
       <div className="w-80 md:w-[700px] pt-4">
         {status === "pending" && <Loader />}
+
         {status === "idle" &&
-          bookmarkedPosts.map((post) => {
+          bookmarkedPosts?.map((post) => {
             return <MiniPost post={post} />;
           })}
       </div>
