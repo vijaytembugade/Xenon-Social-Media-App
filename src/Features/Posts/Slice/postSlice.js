@@ -7,6 +7,7 @@ const initialState = {
   status: "idle",
   error: null,
   singlePost: null,
+  likedLoading: "idle",
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async () => {
@@ -62,6 +63,35 @@ export const updatePost = createAsyncThunk(
       }
     );
     console.log(data);
+    return data;
+  }
+);
+
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ postId, token }) => {
+    const { data } = await axios.post(
+      `/api/posts/like/${postId}`,
+      {},
+      {
+        headers: { authorization: token },
+      }
+    );
+
+    return data;
+  }
+);
+export const dislikePost = createAsyncThunk(
+  "posts/dislikePost",
+  async ({ postId, token }) => {
+    const { data } = await axios.post(
+      `/api/posts/dislike/${postId}`,
+      {},
+      {
+        headers: { authorization: token },
+      }
+    );
+
     return data;
   }
 );
@@ -154,6 +184,32 @@ const postSlice = createSlice({
     });
     builder.addCase(updatePost.rejected, (state, action) => {
       state.status = "error";
+      state.error = action.error.message;
+    });
+
+    //like post
+    builder.addCase(likePost.pending, (state) => {
+      state.likedLoading = "pending";
+    });
+    builder.addCase(likePost.fulfilled, (state, action) => {
+      state.likedLoading = "idle";
+      state.posts = action.payload.posts;
+    });
+    builder.addCase(likePost.rejected, (state, action) => {
+      state.likedLoading = "idle";
+      state.error = action.error.message;
+    });
+
+    //dislike post
+    builder.addCase(dislikePost.pending, (state) => {
+      state.likedLoading = "pending";
+    });
+    builder.addCase(dislikePost.fulfilled, (state, action) => {
+      state.likedLoading = "idle";
+      state.posts = action.payload.posts;
+    });
+    builder.addCase(dislikePost.rejected, (state, action) => {
+      state.likedLoading = "idle";
       state.error = action.error.message;
     });
   },
