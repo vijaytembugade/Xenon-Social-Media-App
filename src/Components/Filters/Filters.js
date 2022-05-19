@@ -6,7 +6,7 @@ import { sortByService } from "../../services";
 
 const Filters = () => {
   const [showFilter, setShowFilter] = useState(false);
-  const [sortBy, setSortBy] = useState("Latest");
+  const [sortBy, setSortBy] = useState("");
   const filterRef = useRef();
   const { posts } = useSelector((store) => store.posts);
   const dispatch = useDispatch();
