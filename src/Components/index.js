@@ -5,3 +5,4 @@ export { PrivateRoutes } from "./PrivateRoutes/PrivateRoutes";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { Toast } from "./Toast/Toast";
 export { UsersList } from "./UsersList/UsersList";
+export { Modal } from "./Modal/Modal";

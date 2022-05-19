@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
-import { Loader, Posts, UsersList } from "../../../Components";
-import Modal from "../../../Components/Modal/Modal";
+import { Loader, Posts, UsersList, Modal } from "../../../Components";
 import { authActions } from "../../Auth/Slice/authSlice";
 import { getUsersPosts } from "../../Posts/Slice/postSlice";
 import ProfileEditModal from "./ProfileEditModal";
@@ -97,8 +96,18 @@ const Profile = () => {
         {status === "pending" && <Loader />}
         {status === "idle" && (
           <Routes>
-            <Route path="" element={<Posts posts={posts} />} />
-            <Route path="posts" element={<Posts posts={posts} />} />
+            <Route
+              path=""
+              element={posts.map((post) => {
+                return <Posts post={post} />;
+              })}
+            />
+            <Route
+              path="posts"
+              element={posts.map((post) => {
+                return <Posts post={post} />;
+              })}
+            />
             <Route path="followings" element={<UsersList />} />
           </Routes>
         )}

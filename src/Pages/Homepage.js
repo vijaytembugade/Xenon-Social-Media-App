@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../Features/Posts/Slice/postSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Loader, Posts, Sidebar, UsersList } from "../Components";
+import { Loader, Modal, Posts, Sidebar, UsersList } from "../Components";
 import { getAllUsers } from "../Features/User/Slice/usersSlice";
 
 const Homepage = () => {
@@ -22,7 +21,16 @@ const Homepage = () => {
       </div>
       <div className="flex flex-col gap-8 justify-center items-center basis-6/6 md:basis-4/6 h-full">
         {status === "pending" && <Loader />}
-        {status === "idle" && <Posts posts={posts} />}
+        <div className="w-60  h-screen flex flex-col justify-start items-center gap-8 ">
+          {status === "idle" &&
+            posts.map((post) => {
+              return (
+                <>
+                  <Posts post={post} />
+                </>
+              );
+            })}
+        </div>
       </div>
       <div className="hidden md:hidden lg:basis-1/6 md:overflow-y-auto lg:block">
         <span className="text-xl m-4">UserList</span>
