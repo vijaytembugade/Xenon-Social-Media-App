@@ -63,12 +63,6 @@ const Profile = () => {
           <span class="text-sm text-gray-500 dark:text-gray-400">{email}</span>
           <div class="flex mt-4 space-x-3 lg:mt-6">
             <button
-              href="#"
-              class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-            >
-              Follow
-            </button>
-            <button
               onClick={() => dispatch(authActions.userLogout())}
               className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
@@ -80,27 +74,17 @@ const Profile = () => {
       <div className="p-16 flex flex-col gap-12 items-center">
         <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
           <li className="mr-2">
-            <NavLink
-              to="posts"
-              aria-current="page"
-              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
-            >
+            <NavLink to="posts" aria-current="page" className="p-4 block">
               Your Posts
             </NavLink>
           </li>
           <li className="mr-2">
-            <NavLink
-              to="followings"
-              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
-            >
+            <NavLink to="followings" className="p-4 block">
               Following
             </NavLink>
           </li>
           <li className="mr-2">
-            <NavLink
-              to="followers"
-              className="inline-block p-4 text-purple-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500"
-            >
+            <NavLink to="followers" className="p-4 block">
               Followers
             </NavLink>
           </li>
