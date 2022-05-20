@@ -119,7 +119,7 @@ const Navbar = () => {
                       <img
                         className="w-6 h-6 rounded-full"
                         src={imgUrl}
-                        alt=""
+                        alt="profile-image"
                         srcset=""
                       />
                     ) : (

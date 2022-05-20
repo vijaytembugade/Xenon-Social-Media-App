@@ -57,7 +57,7 @@ const UserDetails = () => {
                     ? singleUser?.imgUrl
                     : "/assets/profile/profile.png"
                 }
-                alt=""
+                alt="profile-image"
               />
               <div className="text-center">
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">

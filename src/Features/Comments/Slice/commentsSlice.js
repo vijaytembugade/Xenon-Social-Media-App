@@ -52,7 +52,6 @@ export const upvoteComment = createAsyncThunk(
       {},
       { headers: { authorization: token } }
     );
-    console.log(data);
     return data;
   }
 );
@@ -77,7 +76,6 @@ export const deleteComment = createAsyncThunk(
       { headers: { authorization: token } }
     );
 
-    console.log(data);
     return data;
   }
 );

@@ -39,7 +39,11 @@ const Signup = () => {
               alt="logo"
             />
           </h2>
-          <img className="w-full" src="/assets/auth/signup.svg" alt="" />
+          <img
+            className="w-full"
+            src="/assets/auth/signup.svg"
+            alt="signup-img"
+          />
         </div>
 
         <form
