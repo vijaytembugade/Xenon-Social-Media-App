@@ -62,7 +62,6 @@ export const updatePost = createAsyncThunk(
         headers: { authorization: token },
       }
     );
-    console.log(data);
     return data;
   }
 );

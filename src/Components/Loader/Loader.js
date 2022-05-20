@@ -22,7 +22,7 @@ const Loader = ({ w = 6, h = 6, text = "", circular = false }) => {
         </svg>
       )}
       {!circular && (
-        <img className="w-24 h-24" src="/assets/loader.svg" alt="" />
+        <img className="w-24 h-24" src="/assets/loader.svg" alt="loader" />
       )}
       <span>{text}</span>
     </div>

@@ -9,6 +9,9 @@ const initialState = {
   token: getLocaldata?.token || null,
   email: getLocaldata?.email || null,
   isLoggedIn: getLocaldata?.token ? true : false,
+  imgUrl: getLocaldata?.imgUrl,
+  firstName: getLocaldata?.firstName,
+  lastName: getLocaldata?.lastName,
   status: "idle",
   error: null,
   following: [],
@@ -22,7 +25,6 @@ export const userLogin = createAsyncThunk(
       username,
       password,
     });
-    console.log(data);
     return data;
   }
 );
@@ -83,6 +85,9 @@ const authSlice = createSlice({
       state.token = null;
       state.email = null;
       state.isLoggedIn = false;
+      state.imgUrl = "";
+      state.firstName = "";
+      state.lastName = "";
       localStorage.removeItem("USER_DETAILS");
 
       toast.success("Logged Out!");
@@ -107,12 +112,18 @@ const authSlice = createSlice({
       state.email = payload.foundUser.email;
       state.followers = payload.foundUser.followers;
       state.following = payload.foundUser.following;
+      state.imgUrl = "";
+      state.firstName = "";
+      state.lastName = "";
       localStorage.setItem(
         "USER_DETAILS",
         JSON.stringify({
           username: payload.foundUser.username,
           token: payload.encodedToken,
           email: payload.foundUser.email,
+          imgUrl: "",
+          firstName: "",
+          lastName: "",
         })
       );
       toast.success("Logged in successfully!");
@@ -134,12 +145,18 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.username = payload.createdUser.username;
       state.email = payload.createdUser.email;
+      state.imgUrl = "";
+      state.firstName = "";
+      state.lastName = "";
       localStorage.setItem(
         "USER_DETAILS",
         JSON.stringify({
           username: payload.createdUser.username,
           token: payload.encodedToken,
           email: payload.createdUser.email,
+          imgUrl: "",
+          firstName: "",
+          lastName: "",
         })
       );
       toast.success("Logged in successfully!");
@@ -159,12 +176,18 @@ const authSlice = createSlice({
       state.status = "idle";
       state.username = action.payload.user.username;
       state.email = action.payload.user.email;
+      state.imgUrl = action.payload.user.imgUrl;
+      state.firstName = action.payload.user.firstName;
+      state.lastName = action.payload.user.lastName;
       localStorage.setItem(
         "USER_DETAILS",
         JSON.stringify({
           username: action.payload.user.username,
           token: state.token,
           email: action.payload.user.email,
+          imgUrl: action.payload.user.imgUrl,
+          firstName: action.payload.user.firstName,
+          lastName: action.payload.user.lastName,
         })
       );
       toast.success("Profile Updated!");
