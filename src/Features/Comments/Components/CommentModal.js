@@ -58,7 +58,13 @@ const CommentModal = ({ postId }) => {
         </div>
         <div>
           {comments?.map((comment) => {
-            return <CommentsList comment={comment} postId={postId} />;
+            return (
+              <CommentsList
+                key={comment._id}
+                comment={comment}
+                postId={postId}
+              />
+            );
           })}
         </div>
       </div>

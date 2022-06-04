@@ -30,11 +30,7 @@ const Homepage = () => {
         <div className="w-64 md:w-96 h-screen flex flex-col justify-start items-center gap-8 ">
           {status === "idle" &&
             posts.map((post) => {
-              return (
-                <>
-                  <Posts post={post} />
-                </>
-              );
+              return <Posts post={post} key={post._id} />;
             })}
         </div>
       </div>

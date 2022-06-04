@@ -5,7 +5,7 @@ const Modal = ({ children, setShowModal }) => {
   const modalRef = useRef();
   useOnClickOutside(modalRef, () => setShowModal(false));
   return (
-    <div className="fixed w-screen right-0 h-screen bottom-0 modal-bg">
+    <div className="fixed w-screen right-0 h-screen bottom-0 modal-bg z-50">
       <dialog
         ref={modalRef}
         open

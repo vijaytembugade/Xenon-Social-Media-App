@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const { isLoggedIn, imgUrl } = useSelector((store) => store.auth);
   return (
-    <div className="static md:fixed md:top-0 md:left-0 md:right-0">
+    <div className="static md:fixed md:top-0 md:left-0 md:right-0 z-30">
       <nav className="bg-neutral-50 border-gray-200  px-2  md:px-16 py-0 rounded dark:bg-gray-800">
         <div className="container flex flex-wrap justify-between items-center mx-auto ">
           <Link to="/" className="flex items-center">

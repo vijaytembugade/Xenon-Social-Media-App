@@ -15,6 +15,8 @@ export const users = [
     email: "vijay@xenon.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    imgUrl:
+      "https://i.pinimg.com/originals/49/e5/63/49e5631e24fd43af0287e45d3322162c.png",
   },
   {
     _id: "vm123ky",
@@ -22,9 +24,10 @@ export const users = [
     lastName: "Ghodekar",
     username: "yash",
     password: "vijay123",
-    email: "vijay@xenon.com",
+    email: "yash@xenon.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    imgUrl: "https://pngimg.com/uploads/pokemon/small/pokemon_PNG122.png",
   },
   {
     _id: "vm123kj",
@@ -32,8 +35,10 @@ export const users = [
     lastName: "Tamkhane",
     username: "mihir",
     password: "vijay123",
-    email: "vijay@xenon.com",
+    email: "mihir@xenon.com",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    imgUrl:
+      "https://i.pinimg.com/736x/85/1e/cf/851ecf1b1c06cb071c37fb3c6de2ea4a.jpg",
   },
 ];

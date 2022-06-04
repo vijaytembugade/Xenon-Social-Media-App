@@ -17,7 +17,7 @@ const Filters = () => {
 
   useOnClickOutside(filterRef, () => setShowFilter(false));
   return (
-    <div className="relative md:left-[200px]">
+    <div className="relative md:left-[200px] z-10">
       <button
         onClick={() => setShowFilter(true)}
         type="button"

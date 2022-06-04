@@ -1,0 +1,4 @@
+- filter button css issues resolved
+- updated profile picture url as dummy data on backend
+- added missed key props (attribute)
+- post card size updated

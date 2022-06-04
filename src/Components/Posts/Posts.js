@@ -30,7 +30,7 @@ export const Posts = ({ post }) => {
   return (
     <>
       <div
-        className=" flex flex-col items-center p-4 md:p-6 max-w-sm md:max-w-lg bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
+        className="flex flex-col items-center p-4 md:p-6  md:w-[30rem] lg:w-[35rem] bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 hover:cursor-pointer "
         key={post?._id}
       >
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1">

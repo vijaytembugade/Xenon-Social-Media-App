@@ -111,15 +111,19 @@ const Profile = () => {
           <Routes>
             <Route
               path=""
-              element={posts.map((post) => {
-                return <Posts post={post} />;
-              })}
+              element={posts
+                .filter((post) => post.username === username)
+                .map((post) => {
+                  return <Posts post={post} key={post._id} />;
+                })}
             />
             <Route
               path="posts"
-              element={posts.map((post) => {
-                return <Posts post={post} />;
-              })}
+              element={posts
+                .filter((post) => post.username === username)
+                .map((post) => {
+                  return <Posts post={post} key={post._id} />;
+                })}
             />
             <Route
               path="followings"

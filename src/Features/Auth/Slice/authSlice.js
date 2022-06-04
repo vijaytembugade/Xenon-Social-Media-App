@@ -112,18 +112,18 @@ const authSlice = createSlice({
       state.email = payload.foundUser.email;
       state.followers = payload.foundUser.followers;
       state.following = payload.foundUser.following;
-      state.imgUrl = "";
-      state.firstName = "";
-      state.lastName = "";
+      state.imgUrl = payload.foundUser.imgUrl || "";
+      state.firstName = payload.foundUser.firstName || "";
+      state.lastName = payload.foundUser.lastName || "";
       localStorage.setItem(
         "USER_DETAILS",
         JSON.stringify({
           username: payload.foundUser.username,
           token: payload.encodedToken,
           email: payload.foundUser.email,
-          imgUrl: "",
-          firstName: "",
-          lastName: "",
+          imgUrl: payload.foundUser.imgUrl || "",
+          firstName: payload.foundUser.firstName || "",
+          lastName: payload.foundUser.lastName || "",
         })
       );
       toast.success("Logged in successfully!");

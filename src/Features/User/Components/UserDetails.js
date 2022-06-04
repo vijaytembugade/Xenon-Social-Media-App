@@ -94,7 +94,7 @@ const UserDetails = () => {
             {postStatus === "pending" && <Loader />}
             {postStatus === "idle" &&
               posts?.map((post) => {
-                return <MiniPost post={post} />;
+                return <MiniPost post={post} key={post._id} />;
               })}
             {postStatus === "idle" && posts?.length <= 0 && (
               <div>
