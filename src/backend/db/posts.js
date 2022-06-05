@@ -78,4 +78,40 @@ export const posts = [
     createdAt: "2022-04-05T02:17:23+05:30",
     updatedAt: formatDate(),
   },
+  {
+    _id: "p1m4",
+    title:
+      "Firefox Translations Add-on Released by Mozilla Translates Web Pages Offline",
+    content:
+      "Firefox Translations add-on by Mozilla has been released. The new tool has been developed under The Bergamot Project which is aimed to provide an option that runs directly on users' machines for web page translation and, at the same time, preserve their privacy. The add-on will translate the text in and from any language by using the user's computer resources and the data will not be sent to the cloud for processing. It is currently available for translation in eight languages, and work is in progress for further four languages.",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    isPublic: true,
+    username: "vijay",
+    comments: [
+      {
+        _id: uuid(),
+        username: "yash",
+        text: "Perfect explaination",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "mihir",
+        text: "Sounds Interesting",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+    createdAt: "2022-04-05T02:17:23+05:30",
+    updatedAt: formatDate(),
+  },
 ];

@@ -13,7 +13,7 @@ export const users = [
     username: "vijay",
     password: "vijay123",
     email: "vijay@xenon.com",
-    createdAt: formatDate(),
+    createdAt: "2022-06-05T09:52:10+05:30",
     updatedAt: formatDate(),
     imgUrl:
       "https://i.pinimg.com/originals/49/e5/63/49e5631e24fd43af0287e45d3322162c.png",
