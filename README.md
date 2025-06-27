@@ -1,6 +1,6 @@
 # Sapienss - A Social Media App
 
-Sapienss is a socila media platform build for taking your ideas onboard with entire world.
+Sapienss is a social media platform build for taking your ideas onboard with entire world.
 
 ## Live preview Link
 
